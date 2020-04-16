@@ -65971,7 +65971,7 @@ var Index = /*#__PURE__*/function (_React$Component) {
         className: "card-header"
       }, "Index Component"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
-      }, "I'm an index component!", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "hello"))))));
+      }, "I'm an index component!")))));
     }
   }]);
 

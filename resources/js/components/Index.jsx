@@ -15,7 +15,7 @@ class Index extends React.Component {
                             <div className="card-header">Index Component</div>
 
                             <div className="card-body">I'm an index component!
-                <p>hello</p>
+                {/* <p>hello</p> */}
                             </div>
                         </div>
                     </div>
