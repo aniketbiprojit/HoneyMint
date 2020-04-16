@@ -9,7 +9,7 @@ $posters = App\Poster::where('user_id',$user)->get();
 // echo $posters;
 ?>
 
-<div id="index" data="{{ $user }}" poster={{$posters}}>
+<div id="index" userid="{{ $user }}" userdata={{$userData}} poster={{$posters}}>
 </div>
 
 @endsection
