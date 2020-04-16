@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->integer('allowedPosts')->default(1);
             $table->integer('currentPosts')->default(0);
+            $table->integer('ref')->default(0);
         });
     }
 

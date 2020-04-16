@@ -64,10 +64,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if($data['ref']!=0){
+            $referer=User::find($data['ref']);
+            $referer->allowedPosts=$referer->allowedPosts+1;
+            $referer->save();
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'ref'=>$data['ref']
         ]);
     }
     

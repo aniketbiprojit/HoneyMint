@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <?php
-                    $routingPath = 'https://localhost:8080/'.(\Request::getRequestUri());
+                    $routingPath = 'https://localhost:8080'.(\Request::getRequestUri());
                     if(array_key_exists('query',parse_url($routingPath))){
                         $parsed = (parse_url($routingPath))['query'];
                         parse_str($parsed,$data);
@@ -20,7 +20,7 @@
                     $ref=0;
                     // echo $ref;
                     ?>
-                    <form method="POST" action="{{ $routingPath }}">
+                    <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-group row">
