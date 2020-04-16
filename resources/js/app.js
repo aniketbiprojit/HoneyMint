@@ -12,10 +12,4 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-class App extends React.Component { 
-    
-};
+require('./components/Index');
