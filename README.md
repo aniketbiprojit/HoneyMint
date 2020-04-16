@@ -8,5 +8,6 @@ Also create the database DB_DATABASE
 ## Running instructions
 
 `composer.phar install`
-`php artisan serve`
+`npm install && npm run dev`
 `php artisan migrate:refresh`
+`php artisan serve`
