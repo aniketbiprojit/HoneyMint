@@ -8,7 +8,19 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <?php
+                    $routingPath = 'https://localhost:8080/'.(\Request::getRequestUri());
+                    if(array_key_exists('query',parse_url($routingPath))){
+                        $parsed = (parse_url($routingPath))['query'];
+                        parse_str($parsed,$data);
+                        if(array_key_exists('ref',$data))
+                            $ref = $data['ref'];
+                    }
+                    else
+                    $ref=0;
+                    // echo $ref;
+                    ?>
+                    <form method="POST" action="{{ $routingPath }}">
                         @csrf
 
                         <div class="form-group row">
@@ -60,7 +72,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
+                        <input type="hidden" name="ref" value={{$ref}}>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

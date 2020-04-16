@@ -99,8 +99,8 @@ class Modal extends React.Component {
     }
 }
 
-function Image(props){
-    return <img src={props.path}/>
+function Image(props) {
+    return <img src={props.path} />;
 }
 
 class Poster extends React.Component {
@@ -118,12 +118,11 @@ class Poster extends React.Component {
     render() {
         return (
             <div>
-                
                 {this.state.load
                     ? this.state.imgs.forEach(elem => {
-                        <li>
-                            <Image path='http://localhost:8000/images/1/1587042774.png'/>
-                        </li>
+                          <li>
+                              <Image path="http://localhost:8000/images/1/1587042774.png" />
+                          </li>;
                       })
                     : 0}
             </div>
@@ -169,14 +168,44 @@ class Index extends React.Component {
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-md-6">
-                                            Uploaded Posts :{" "}
-                                            {this.state.userdata.currentPosts}{" "}
+                                            <h3>
+                                                Uploaded Posts :{" "}
+                                                {
+                                                    this.state.userdata
+                                                        .currentPosts
+                                                }{" "}
+                                            </h3>
                                         </div>
                                         <div className="col-md-6">
-                                            Remaining Posts:
-                                            {this.state.userdata.allowedPosts -
-                                                this.state.userdata
-                                                    .currentPosts}
+                                            <h3>
+                                                Remaining Posts:
+                                                {this.state.userdata
+                                                    .allowedPosts -
+                                                    this.state.userdata
+                                                        .currentPosts}
+                                            </h3>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-1"></div>
+                                            <div className="col-md-12">
+                                                <p
+                                                    style={{
+                                                        textAlign: "center"
+                                                    }}
+                                                >
+                                                    Copy this link and share{" "}
+                                                    {/* <br /> */}
+                                                    <a
+                                                        target="_blank"
+                                                        style={{
+                                                            color: "blue",
+                                                            textDecoration:
+                                                                "underline"
+                                                        }}
+                                                    >{`https://localhost:8000/register?ref=${this.state.userdata.id}`}</a>{" "}
+                                                    to upload more posters
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

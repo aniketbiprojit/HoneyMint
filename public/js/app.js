@@ -66965,9 +66965,25 @@ var Index = /*#__PURE__*/function (_React$Component3) {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
-      }, "Uploaded Posts :", " ", this.state.userdata.currentPosts, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Uploaded Posts :", " ", this.state.userdata.currentPosts, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
-      }, "Remaining Posts:", this.state.userdata.allowedPosts - this.state.userdata.currentPosts)))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Poster, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Remaining Posts:", this.state.userdata.allowedPosts - this.state.userdata.currentPosts)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-1"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        style: {
+          textAlign: "center"
+        }
+      }, "Copy this link and share", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        target: "_blank",
+        style: {
+          color: "blue",
+          textDecoration: "underline"
+        }
+      }, "https://localhost:8000/register?ref=".concat(this.state.userdata.id)), " ", "to upload more posters")))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Poster, {
         posters: this.props.userdata
       })));
     }
