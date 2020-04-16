@@ -7,10 +7,14 @@ Also create the database DB_DATABASE
 
 ## Running instructions
 
-`composer.phar install`
+```
+composer.phar install
 
-`npm install && npm run dev`
+npm install && npm run dev
 
-`php artisan migrate:refresh`
+php artisan migrate:refresh
 
-`php artisan serve`
+php artisan serve
+```
+
+### Visit http://localhost:8000/
