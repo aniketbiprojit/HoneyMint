@@ -6,7 +6,8 @@
 $user = Auth::user()->id;
 $userData = App\User::find($user);
 $posters = App\Poster::where('user_id',$user)->get();
-// echo $posters;
+// echo session()->get('key');
+// echo 'ok';
 ?>
 
 <div id="index" userid="{{ $user }}" userdata={{$userData}} poster={{$posters}}>

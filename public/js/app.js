@@ -66716,21 +66716,34 @@ var Modal = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.handleUpload = _this.handleUpload.bind(_assertThisInitialized(_this));
+    _this.close = _this.close.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Modal, [{
+    key: "close",
+    value: function close() {
+      this.forceUpdate();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var elem_hidden = document.getElementById("hide");
+      elem_hidden.style.visibility = "hidden";
+      elem_hidden.style.display = "none";
+    }
+  }, {
     key: "handleUpload",
     value: function () {
       var _handleUpload = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var formdata, data;
+        var formdata, data, elem_hidden;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 formdata = new FormData();
                 formdata.append("image", this.state.image);
-                console.log(formdata);
+                formdata.append("userId", this.props.data.id);
                 _context.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_3___default()({
                   url: "/api/upload",
@@ -66744,7 +66757,16 @@ var Modal = /*#__PURE__*/function (_React$Component) {
               case 5:
                 data = _context.sent;
 
-              case 6:
+                if (data.status === 200) {
+                  console.log(data);
+                  document.getElementById('uploadDone').style.display = 'none';
+                  document.getElementById('uploadDone').style.visibility = 'hidden';
+                  elem_hidden = document.getElementById("hide");
+                  elem_hidden.style.visibility = "visible";
+                  elem_hidden.style.display = "block";
+                }
+
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -66780,6 +66802,9 @@ var Modal = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
         "class": "heading"
       }, "Upload Poster")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "uploadDone"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "shown-open",
         "class": "modal-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
         "class": "fas fa-bell fa-4x animated rotateIn mb-4"
@@ -66797,7 +66822,14 @@ var Modal = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         onClick: this.handleUpload,
         "class": "btn btn-info"
-      }, "Upload")))));
+      }, "Upload"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "hide",
+        "class": "modal-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        "class": "btn btn-secondary",
+        "data-dismiss": "modal"
+      }, "Close")))));
     }
   }]);
 
@@ -66829,7 +66861,9 @@ var Index = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Modal, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Modal, {
+        data: this.state.userdata
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row justify-content-center"

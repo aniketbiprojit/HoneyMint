@@ -5,14 +5,21 @@ import axios from "axios";
 class Modal extends React.Component {
     constructor(props) {
         super(props);
-        this.handleUpload=this.handleUpload.bind(this);
+        this.handleUpload = this.handleUpload.bind(this);
+        this.close= this.close.bind(this);
     }
 
+    close(){this.forceUpdate();}
 
+    componentDidMount() {
+        const elem_hidden = document.getElementById("hide");
+        elem_hidden.style.visibility = "hidden";
+        elem_hidden.style.display = "none";
+    }
     async handleUpload() {
         const formdata = new FormData();
         formdata.append("image", this.state.image);
-        console.log(formdata)
+        formdata.append("userId", this.props.data.id);
         const data = await axios({
             url: "/api/upload",
             method: "POST",
@@ -21,7 +28,14 @@ class Modal extends React.Component {
                 "Content-Type": "multipart/form-data"
             }
         });
-
+        if (data.status === 200) {
+            console.log(data);
+            document.getElementById('uploadDone').style.display='none';
+            document.getElementById('uploadDone').style.visibility='hidden';
+            const elem_hidden = document.getElementById("hide");
+            elem_hidden.style.visibility = "visible";
+            elem_hidden.style.display = "block";
+        }
     }
 
     render() {
@@ -42,18 +56,40 @@ class Modal extends React.Component {
                         <div class="modal-header d-flex justify-content-center">
                             <h3 class="heading">Upload Poster</h3>
                         </div>
+                        <div id="uploadDone">
+                            <div id="shown-open" class="modal-body">
+                                <i class="fas fa-bell fa-4x animated rotateIn mb-4"></i>
+                                <form>
+                                    <input
+                                        onChange={e =>
+                                            this.setState({
+                                                image: e.target.files[0]
+                                            })
+                                        }
+                                        type="file"
+                                        name="image"
+                                        id="image"
+                                    />
+                                </form>
+                            </div>
 
-                        <div class="modal-body">
-                            <i class="fas fa-bell fa-4x animated rotateIn mb-4"></i>
-                            <form>
-                                <input onChange={(e) => this.setState({image:e.target.files[0]})} type="file" name="image" id="image" />
-                            </form>
+                            <div class="modal-footer flex-center">
+                                <a
+                                    onClick={this.handleUpload}
+                                    class="btn btn-info"
+                                >
+                                    Upload
+                                </a>
+                            </div>
                         </div>
-
-                        <div class="modal-footer flex-center">
-                            <a onClick={this.handleUpload} class="btn btn-info">
-                                Upload
-                            </a>
+                        <div id="hide" class="modal-body">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                            >
+                                Close
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -76,7 +112,7 @@ class Index extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Modal />
+                <Modal data={this.state.userdata} />
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-md-10">
@@ -103,21 +139,16 @@ class Index extends React.Component {
 
                                 <div className="card-body">
                                     <div className="row">
-                                        
-                                            <div className="col-md-6">
-                                                Uploaded Posts :{" "}
-                                                {
-                                                    this.state.userdata
-                                                        .currentPosts
-                                                }{" "}
-                                            </div>
-                                            <div className="col-md-6">
-                                                Remaining Posts:
-                                                {this.state.userdata
-                                                    .allowedPosts -
-                                                    this.state.userdata
-                                                        .currentPosts}
-                                            </div>
+                                        <div className="col-md-6">
+                                            Uploaded Posts :{" "}
+                                            {this.state.userdata.currentPosts}{" "}
+                                        </div>
+                                        <div className="col-md-6">
+                                            Remaining Posts:
+                                            {this.state.userdata.allowedPosts -
+                                                this.state.userdata
+                                                    .currentPosts}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
