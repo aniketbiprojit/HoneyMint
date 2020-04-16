@@ -66758,9 +66758,8 @@ var Modal = /*#__PURE__*/function (_React$Component) {
                 data = _context.sent;
 
                 if (data.status === 200) {
-                  console.log(data);
-                  document.getElementById('uploadDone').style.display = 'none';
-                  document.getElementById('uploadDone').style.visibility = 'hidden';
+                  document.getElementById("uploadDone").style.display = "none";
+                  document.getElementById("uploadDone").style.visibility = "hidden";
                   elem_hidden = document.getElementById("hide");
                   elem_hidden.style.visibility = "visible";
                   elem_hidden.style.display = "block";
@@ -66836,29 +66835,101 @@ var Modal = /*#__PURE__*/function (_React$Component) {
   return Modal;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
-var Index = /*#__PURE__*/function (_React$Component2) {
-  _inherits(Index, _React$Component2);
+function Image(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    src: props.path
+  });
+}
 
-  var _super2 = _createSuper(Index);
+var Poster = /*#__PURE__*/function (_React$Component2) {
+  _inherits(Poster, _React$Component2);
 
-  function Index(props) {
+  var _super2 = _createSuper(Poster);
+
+  function Poster() {
     var _this3;
 
-    _classCallCheck(this, Index);
+    _classCallCheck(this, Poster);
 
-    _this3 = _super2.call(this, props);
-    var data = JSON.parse(_this3.props.userdata);
+    _this3 = _super2.call(this);
     _this3.state = {
-      userdata: data
+      load: false,
+      imgs: []
     };
     return _this3;
   }
 
-  _createClass(Index, [{
+  _createClass(Poster, [{
     key: "componentDidMount",
-    value: function componentDidMount() {// console.log(this.state);
-    }
+    value: function () {
+      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                data = JSON.parse(this.props.posters);
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/posters", {
+                  id: data.id
+                });
+
+              case 3:
+                data = _context2.sent;
+                this.setState({
+                  imgs: data.data,
+                  load: true
+                }); // this.forceUpdate();
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function componentDidMount() {
+        return _componentDidMount.apply(this, arguments);
+      }
+
+      return componentDidMount;
+    }()
   }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, this.state.load ? this.state.imgs.forEach(function (elem) {
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Image, {
+          path: "http://localhost:8000/images/1/1587042774.png"
+        }));
+      }) : 0);
+    }
+  }]);
+
+  return Poster;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+
+var Index = /*#__PURE__*/function (_React$Component3) {
+  _inherits(Index, _React$Component3);
+
+  var _super3 = _createSuper(Index);
+
+  function Index(props) {
+    var _this4;
+
+    _classCallCheck(this, Index);
+
+    _this4 = _super3.call(this, props);
+    var data = JSON.parse(_this4.props.userdata);
+    _this4.state = {
+      userdata: data,
+      posters: []
+    };
+    return _this4;
+  }
+
+  _createClass(Index, [{
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Modal, {
@@ -66896,7 +66967,9 @@ var Index = /*#__PURE__*/function (_React$Component2) {
         className: "col-md-6"
       }, "Uploaded Posts :", " ", this.state.userdata.currentPosts, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
-      }, "Remaining Posts:", this.state.userdata.allowedPosts - this.state.userdata.currentPosts))))))));
+      }, "Remaining Posts:", this.state.userdata.allowedPosts - this.state.userdata.currentPosts)))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Poster, {
+        posters: this.props.userdata
+      })));
     }
   }]);
 

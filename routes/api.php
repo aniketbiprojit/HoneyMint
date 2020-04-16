@@ -19,3 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/upload','UploadController@index')->name('upload.image.post');
+Route::post('/user',function(Request $request){
+    // error_log($request->id);
+    // error_log(App\User::find($request->id));
+    return (App\User::find($request->id));
+});
+Route::post('/posters',function(Request $request){
+
+return (App\Poster::where('user_id',$request->id)->get());
+});

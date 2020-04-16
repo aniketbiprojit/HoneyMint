@@ -14,7 +14,7 @@ class UploadController extends Controller
             $userId = $request->userId;
 
             $data = User::find($userId)->get()[0];
-            if($data->allowedPosts > 0){
+            if($data->allowedPosts >= $data->currentPosts){
             
             $imageName = time().'.'.$request->image->extension();  
             $folder = 'images/'.$userId.'/';

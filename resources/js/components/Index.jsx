@@ -6,10 +6,12 @@ class Modal extends React.Component {
     constructor(props) {
         super(props);
         this.handleUpload = this.handleUpload.bind(this);
-        this.close= this.close.bind(this);
+        this.close = this.close.bind(this);
     }
 
-    close(){this.forceUpdate();}
+    close() {
+        this.forceUpdate();
+    }
 
     componentDidMount() {
         const elem_hidden = document.getElementById("hide");
@@ -29,9 +31,8 @@ class Modal extends React.Component {
             }
         });
         if (data.status === 200) {
-            console.log(data);
-            document.getElementById('uploadDone').style.display='none';
-            document.getElementById('uploadDone').style.visibility='hidden';
+            document.getElementById("uploadDone").style.display = "none";
+            document.getElementById("uploadDone").style.visibility = "hidden";
             const elem_hidden = document.getElementById("hide");
             elem_hidden.style.visibility = "visible";
             elem_hidden.style.display = "block";
@@ -98,15 +99,43 @@ class Modal extends React.Component {
     }
 }
 
+function Image(props){
+    return <img src={props.path}/>
+}
+
+class Poster extends React.Component {
+    constructor() {
+        super();
+        this.state = { load: false, imgs: [] };
+    }
+    async componentDidMount() {
+        let data = JSON.parse(this.props.posters);
+        data = await axios.post("/api/posters", { id: data.id });
+        this.setState({ imgs: data.data, load: true });
+        // this.forceUpdate();
+    }
+
+    render() {
+        return (
+            <div>
+                
+                {this.state.load
+                    ? this.state.imgs.forEach(elem => {
+                        <li>
+                            <Image path='http://localhost:8000/images/1/1587042774.png'/>
+                        </li>
+                      })
+                    : 0}
+            </div>
+        );
+    }
+}
+
 class Index extends React.Component {
     constructor(props) {
         super(props);
         const data = JSON.parse(this.props.userdata);
-        this.state = { userdata: data };
-    }
-
-    componentDidMount() {
-        // console.log(this.state);
+        this.state = { userdata: data, posters: [] };
     }
 
     render() {
@@ -154,6 +183,7 @@ class Index extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <Poster posters={this.props.userdata} />
                 </div>
             </React.Fragment>
         );
